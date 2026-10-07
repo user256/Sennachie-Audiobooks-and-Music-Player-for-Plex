@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Plex Touch"
+rootProject.name = "Sennachie for Plex"
 include(":app")
 // Ticket 141: the Wear OS companion and the pure protocol it shares with the phone app.
 include(":wear")

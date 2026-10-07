@@ -1,4 +1,14 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
+
+val signingProperties = Properties()
+val signingPropertiesFile = rootProject.file("signing.properties")
+val releaseSigningKeys = listOf("storeFile", "storePassword", "keyAlias", "keyPassword")
+val releaseSigningConfigured = signingPropertiesFile.isFile
+
+if (releaseSigningConfigured) {
+    signingPropertiesFile.inputStream().use(signingProperties::load)
+}
 
 plugins {
     alias(libs.plugins.android.application)
@@ -13,8 +23,8 @@ android {
     defaultConfig {
         minSdk = 26
         targetSdk = 36
-        versionCode = 17
-        versionName = "0.7.1"
+        versionCode = 18
+        versionName = "0.8.0"
         applicationId = "org.johnfegan.musicbooks"
         buildConfigField("boolean", "HOUSEHOLD_INTEGRATION", "false")
         buildConfigField("String", "PRODUCT_NAME", "\"Sennachie for Plex\"")
@@ -24,6 +34,25 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+
+    signingConfigs {
+        if (releaseSigningConfigured) {
+            create("release") {
+                // signing.properties is intentionally gitignored. A missing or incomplete file is
+                // reported by verifyReleaseSigning before an APK can be packaged.
+                storeFile = rootProject.file(signingProperties.getProperty("storeFile").orEmpty())
+                storePassword = signingProperties.getProperty("storePassword").orEmpty()
+                keyAlias = signingProperties.getProperty("keyAlias").orEmpty()
+                keyPassword = signingProperties.getProperty("keyPassword").orEmpty()
+            }
+        }
+    }
+
+    buildTypes.named("release") {
+        if (releaseSigningConfigured) {
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
@@ -88,4 +117,27 @@ dependencies {
     implementation(libs.play.services.wearable)
     testImplementation(libs.junit)
     debugImplementation(libs.androidx.compose.ui.tooling)
+}
+
+tasks.register("verifyReleaseSigning") {
+    group = "verification"
+    description = "Refuses unsigned release builds."
+    doLast {
+        check(releaseSigningConfigured) {
+            "Release signing is not configured. Copy signing.properties.example to signing.properties and keep both it and the keystore outside version control."
+        }
+        val missing = releaseSigningKeys.filter { signingProperties.getProperty(it).isNullOrBlank() }
+        check(missing.isEmpty()) {
+            "Release signing is incomplete; missing: ${missing.joinToString()}."
+        }
+        check(rootProject.file(signingProperties.getProperty("storeFile")).isFile) {
+            "Release keystore does not exist at the storeFile path in signing.properties."
+        }
+    }
+}
+
+tasks.configureEach {
+    if (name == "packageRelease") {
+        dependsOn("verifyReleaseSigning")
+    }
 }

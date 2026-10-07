@@ -15,7 +15,7 @@ Sennachie is in active personal testing and has only been tested on the author's
 
 It is shared because it solves a few frustrating personal pain points: a focused audiobook player with an easy skip-back flow, and a music player that can keep an album playing on repeat.
 
-The first GitHub release will be a signed Android APK for people comfortable installing apps outside Google Play. Until that release is available, use the source only if you are happy building Android projects yourself.
+Releases are signed Android APKs for people comfortable installing apps outside Google Play. The original `0.7.1-preview` build used Android's debug key; anyone who installed it must uninstall it once before installing the first signed release.
 
 ## What it does
 
@@ -35,7 +35,7 @@ The first GitHub release will be a signed Android APK for people comfortable ins
 
 ## Install from GitHub
 
-When the first release is published:
+To install a release:
 
 1. Open the [Releases](../../releases) page on your Android phone.
 2. Download the APK attached to the latest release.
@@ -56,15 +56,15 @@ You need Android SDK Platform 36 and Java 17.
 
 ```bash
 cp local.properties.example local.properties
-./gradlew :app:assemblePublicDebug
+./gradlew :app:assembleDebug
 ```
 
-The resulting APK is at `app/build/outputs/apk/public/debug/app-public-debug.apk`.
+The resulting APK is at `app/build/outputs/apk/debug/app-debug.apk`.
 
 For checks used by the project:
 
 ```bash
-./gradlew :app:testPublicDebugUnitTest :app:lintPublicDebug
+./gradlew :app:testDebugUnitTest :app:lintDebug
 ```
 
 ## Feedback and support

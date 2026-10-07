@@ -1,0 +1,7 @@
+# Copy this file to signing.properties. It is ignored by Git: never commit a key path or password.
+# Keep the keystore outside this repository and back it up, together with its passwords, in a
+# password manager. Losing it means Android users cannot install future updates over this app.
+storeFile=/absolute/path/outside/this/repository/sennachie-release.jks
+storePassword=replace-with-keystore-password
+keyAlias=sennachie
+keyPassword=replace-with-key-password
