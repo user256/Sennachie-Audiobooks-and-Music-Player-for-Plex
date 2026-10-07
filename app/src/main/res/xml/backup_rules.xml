@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Auto Backup rules for API 26-30. The encrypted preference file and the security-crypto keysets are
+  wrapped by a keystore key that never leaves the original device, so a restored copy cannot be read and
+  would crash the app at startup. Offline audio is excluded so it does not count against the backup cap.
+-->
+<full-backup-content>
+    <exclude domain="sharedpref" path="plex_touch_secure.xml" />
+    <exclude domain="sharedpref" path="__androidx_security_crypto_encrypted_prefs_key_keyset__.xml" />
+    <exclude domain="sharedpref" path="__androidx_security_crypto_encrypted_prefs_value_keyset__.xml" />
+    <exclude domain="external" path="Music/offline" />
+</full-backup-content>

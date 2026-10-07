@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ticket 139: the "Now playing" widget. RemoteViews-safe views only; text and art are set by WidgetViews. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/widget_art"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/widget_art_background"
+        android:importantForAccessibility="no"
+        android:padding="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_sennachie_mark" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/widget_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/app_name"
+            android:textColor="@color/widget_text"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/widget_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/widget_description"
+            android:textColor="@color/widget_text_secondary"
+            android:textSize="13sp" />
+
+        <ProgressBar
+            android:id="@+id/widget_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="6dp"
+            android:max="1000"
+            android:progress="0"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/widget_toggle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/widget_button_background"
+        android:contentDescription="@string/widget_play"
+        android:src="@drawable/ic_widget_play"
+        android:visibility="gone" />
+</LinearLayout>

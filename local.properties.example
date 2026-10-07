@@ -1,0 +1,8 @@
+# Copy to local.properties and set your Android SDK path (see Android Studio:
+# Settings → Languages & Frameworks → Android SDK → "Android SDK location").
+#
+#   cp local.properties.example local.properties
+#   nano local.properties
+#
+# Typical Linux path if you used the default install:
+sdk.dir=/home/YOUR_USERNAME/Android/Sdk

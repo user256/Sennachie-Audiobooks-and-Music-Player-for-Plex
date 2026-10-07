@@ -1,0 +1,12 @@
+<!-- "Listening Temple" launcher glyph: headphones over a classical temple. Scaled into the adaptive-icon safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <group android:scaleX="0.78" android:scaleY="0.78" android:translateX="15" android:translateY="16.56">
+        <path android:fillColor="#FFFFFF" android:pathData="M16,56 H19 A5,5 0 0 1 24,61 V74 A5,5 0 0 1 19,79 H16 A5,5 0 0 1 11,74 V61 A5,5 0 0 1 16,56 Z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M81,56 H84 A5,5 0 0 1 89,61 V74 A5,5 0 0 1 84,79 H81 A5,5 0 0 1 76,74 V61 A5,5 0 0 1 81,56 Z" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="5.5" android:strokeLineCap="round" android:pathData="M18,63 V50 A32,32 0 0 1 82,50 V63" />
+        <path android:fillColor="#FFFFFF" android:pathData="M30,47 L50,36 L70,47 Z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M29,48 H71 V52 H29 Z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M32,54 H37 V71 H32 Z M41,54 H46 V71 H41 Z M54,54 H59 V71 H54 Z M63,54 H68 V71 H63 Z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M28,72 H72 V75.5 H28 Z M26,77 H74 V80.5 H26 Z" />
+    </group>
+</vector>

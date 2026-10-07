@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ticket 141: lets the Wear OS companion find a phone with this app installed (WearPaths.PHONE_CAPABILITY). -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="android_wear_capabilities" translatable="false" tools:ignore="UnusedResources">
+        <item>plextouch_phone</item>
+    </string-array>
+</resources>

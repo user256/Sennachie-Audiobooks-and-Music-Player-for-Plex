@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ticket 141: lets the phone app find a watch with the companion installed (WearPaths.WATCH_CAPABILITY). -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="android_wear_capabilities" translatable="false" tools:ignore="UnusedResources">
+        <item>plextouch_watch</item>
+    </string-array>
+</resources>

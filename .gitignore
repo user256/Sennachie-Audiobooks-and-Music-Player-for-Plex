@@ -1,0 +1,34 @@
+# Android / Gradle
+.gradle/
+.kotlin/
+local.properties
+*.apk
+*.aab
+app/build/
+build/
+captures/
+dist/
+
+# IDE / OS files
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Python cache (ticket tooling)
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# Private files
+Private.md
+PRIVATE*
+/private
+/private.md
+tools.md

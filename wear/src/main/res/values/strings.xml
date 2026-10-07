@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ticket 141: the Wear OS companion. app_name comes from each flavour, so the watch reads as its phone app. -->
+<resources>
+    <string name="app_name">Sennachie for Plex</string>
+    <string name="complication_label">Audiobook progress</string>
+    <string name="complication_percent">%1$d%%</string>
+    <!-- Spoken by screen readers for the complication: "The Long Road, 42% listened". -->
+    <string name="complication_description">%1$s, %2$d%% listened</string>
+    <string name="complication_preview_title">Your audiobook</string>
+
+    <string name="status_checking">Looking for your phone…</string>
+    <string name="status_no_app">Install %1$s on your phone to use this watch app.</string>
+    <string name="status_unreachable">Phone not connected. Controls come back when the watch can reach it.</string>
+    <string name="status_signed_out">Sign in on your phone to see your books.</string>
+    <string name="status_nothing">Nothing playing on your phone.</string>
+    <string name="status_update">Update %1$s on both your phone and this watch.</string>
+    <string name="status_waiting_state">Waiting for your phone…</string>
+
+    <string name="home_phone">Phone</string>
+    <string name="home_reading_list">Reading list</string>
+    <string name="home_watch_book">On this watch</string>
+    <string name="preview_label">Preview</string>
+    <string name="last_played">Last played</string>
+    <string name="now_playing">Now playing</string>
+
+    <string name="chapter_number">Chapter %1$d</string>
+    <string name="chapter_of">Chapter %1$d of %2$d</string>
+    <string name="position_of">%1$s / %2$s</string>
+    <string name="percent_listened">%1$d%% listened</string>
+
+    <string name="action_play">Play</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_back_30">Back 30 seconds</string>
+    <string name="action_forward_30">Forward 30 seconds</string>
+    <string name="action_previous_chapter">Previous chapter</string>
+    <string name="action_next_chapter">Next chapter</string>
+    <string name="action_speed">Speed %1$s</string>
+    <string name="speed_title">Playback speed</string>
+    <string name="speed_value">%1$s×</string>
+    <string name="speed_saved_note">Saved as this book\'s speed on your phone.</string>
+
+    <string name="command_failed">Your phone did not respond.</string>
+    <string name="command_nothing">Nothing is loaded on your phone.</string>
+    <string name="command_not_audiobook">Speed is only for audiobooks.</string>
+
+    <string name="reading_list_empty">Your reading list is empty. Add books on your phone.</string>
+    <string name="entry_on_phone">Downloaded on phone, %1$s</string>
+    <string name="entry_not_downloaded">Download it on your phone first to copy it here.</string>
+    <string name="copy_to_watch">Copy to watch</string>
+
+    <string name="consent_title">Copy to this watch?</string>
+    <string name="consent_body">%1$s (%2$s) will be copied from your phone. Free on this watch: %3$s. The copy uses Bluetooth or Wi-Fi, or mobile data when the phone is not nearby, and can take a long time; keep the watch charging. Only one book fits on the watch at a time.</string>
+    <string name="consent_confirm">Copy</string>
+    <string name="consent_cancel">Cancel</string>
+
+    <string name="size_mb">%1$.0f MB</string>
+    <string name="size_gb">%1$.1f GB</string>
+
+    <string name="book_none">No book on this watch. Copy one from your reading list.</string>
+    <string name="book_waiting">Waiting for your phone…</string>
+    <string name="book_receiving">Copying file %1$d of %2$d (%3$s of %4$s)</string>
+    <string name="book_failed">Copy stopped: %1$s</string>
+    <string name="book_retry">Retry</string>
+    <string name="book_ready">Ready to play on this watch</string>
+    <string name="book_verify_failed">A file on this watch failed its check. Remove the book and copy it again.</string>
+    <string name="book_remove">Remove from watch</string>
+    <string name="book_remove_confirm">Remove %1$s from this watch? Positions not yet sent to your phone are dropped.</string>
+    <string name="book_play_local">Play on watch</string>
+
+    <string name="resume_title">Where to resume?</string>
+    <string name="resume_body">Your phone saved a newer position (%1$s). This watch was at %2$s.</string>
+    <string name="resume_phone">Phone position</string>
+    <string name="resume_watch">Watch position</string>
+    <string name="position_label">Chapter %1$d, %2$s</string>
+
+    <string name="notice_stale">Your phone has listened since, so it kept its own position.</string>
+    <string name="notice_scope">Your phone is signed in to another account, so watch positions were not synced.</string>
+    <string name="notice_unknown">Your phone no longer knows this copy, so positions were not synced.</string>
+    <plurals name="pending_sync">
+        <item quantity="one">%1$d position waiting for your phone</item>
+        <item quantity="other">%1$d positions waiting for your phone</item>
+    </plurals>
+
+    <string name="refusal_signed_out">signed out on your phone</string>
+    <string name="refusal_not_on_list">not on your reading list</string>
+    <string name="refusal_not_downloaded">not fully downloaded on your phone</string>
+    <string name="refusal_too_large">too large for the watch</string>
+    <string name="refusal_too_many_files">too many files</string>
+    <string name="refusal_insufficient_space">not enough space on this watch</string>
+    <string name="refusal_already_holding">remove the book on this watch first</string>
+    <string name="refusal_busy">a copy is already in progress</string>
+    <string name="refusal_failed">the transfer was interrupted</string>
+</resources>

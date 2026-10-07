@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ticket 139. updatePeriodMillis is 0: the app refreshes the widget on playback, download and account events only. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialKeyguardLayout="@layout/widget_now_playing"
+    android:initialLayout="@layout/widget_now_playing"
+    android:minWidth="250dp"
+    android:minHeight="40dp"
+    android:resizeMode="horizontal"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen|keyguard" />

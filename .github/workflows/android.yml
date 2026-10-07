@@ -1,0 +1,65 @@
+# Android CI: unit tests, lint and a debug build on every push and pull request.
+#
+# local.properties is gitignored. The Android Gradle plugin falls back to
+# ANDROID_HOME / ANDROID_SDK_ROOT, which the GitHub runner sets, so no SDK
+# path file is needed here.
+name: Android CI
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android:
+    name: Unit tests, lint and public debug build
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK (platform 36)
+        uses: android-actions/setup-android@v3
+        with:
+          packages: platforms;android-36 build-tools;35.0.0 platform-tools
+
+      - name: Set up Gradle (with build cache)
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Unit tests, lint and public debug build
+        run: ./gradlew testDebugUnitTest lintDebug assembleDebug :wear-shared:test :wear:assembleDebug --no-daemon --stacktrace
+
+      - name: Upload lint reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-reports
+          path: |
+            app/build/reports/lint-results-*
+            wear/build/reports/lint-results-*
+          if-no-files-found: ignore
+
+      - name: Upload unit test reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-reports
+          path: |
+            app/build/reports/tests/
+            wear-shared/build/reports/tests/
+          if-no-files-found: ignore
+
+      - name: Upload public debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: sennachie-debug
+          path: app/build/outputs/apk/debug/app-debug.apk

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  API 31+ equivalent of backup_rules.xml. Keystore-wrapped secrets never survive a cloud restore or a
+  device-to-device transfer, and offline audio is re-downloadable, so both are left out of each path.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="plex_touch_secure.xml" />
+        <exclude domain="sharedpref" path="__androidx_security_crypto_encrypted_prefs_key_keyset__.xml" />
+        <exclude domain="sharedpref" path="__androidx_security_crypto_encrypted_prefs_value_keyset__.xml" />
+        <exclude domain="external" path="Music/offline" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="plex_touch_secure.xml" />
+        <exclude domain="sharedpref" path="__androidx_security_crypto_encrypted_prefs_key_keyset__.xml" />
+        <exclude domain="sharedpref" path="__androidx_security_crypto_encrypted_prefs_value_keyset__.xml" />
+        <exclude domain="external" path="Music/offline" />
+    </device-transfer>
+</data-extraction-rules>

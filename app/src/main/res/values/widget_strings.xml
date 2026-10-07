@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ticket 139: home-screen widget and launcher shortcuts. Product names come from app_name, so each flavour reads as itself. -->
+<resources>
+    <string name="widget_label">Now playing</string>
+    <string name="widget_description">Resume your last audiobook or album and see how far you are.</string>
+    <string name="widget_empty_nothing">Nothing played yet. Open %1$s to start listening.</string>
+    <string name="widget_empty_signed_out">Sign in to %1$s to see what you were listening to.</string>
+    <!-- Shown instead of the title on a lock screen that hides sensitive content. -->
+    <string name="widget_private_playing">Playing</string>
+    <string name="widget_private_paused">Ready to resume</string>
+    <string name="widget_play">Play</string>
+    <string name="widget_pause">Pause</string>
+
+    <string name="shortcut_resume_short">Resume audiobook</string>
+    <string name="shortcut_music_short">Open music</string>
+    <string name="shortcut_downloads_short">Downloads</string>
+    <!-- "Resume audiobook in Plex Touch": %1$s is a shortcut name above, %2$s the app's name. -->
+    <string name="shortcut_long_label">%1$s in %2$s</string>
+</resources>
