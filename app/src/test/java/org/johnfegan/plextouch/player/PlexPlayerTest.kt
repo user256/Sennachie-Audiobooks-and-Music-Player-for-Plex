@@ -1,6 +1,7 @@
 package org.johnfegan.plextouch.player
 
 import androidx.media3.common.C
+import androidx.media3.common.Player
 import org.johnfegan.plextouch.data.PlexAlbum
 import org.johnfegan.plextouch.data.PlexConnection
 import org.johnfegan.plextouch.data.PlexTrack
@@ -11,6 +12,12 @@ import org.junit.Test
 import org.johnfegan.plextouch.ui.UiText
 
 class PlexPlayerTest {
+    @Test fun musicRepeatCyclesFromOffToAlbumToTrackThenOff() {
+        assertEquals(Player.REPEAT_MODE_ALL, nextMusicRepeatMode(Player.REPEAT_MODE_OFF))
+        assertEquals(Player.REPEAT_MODE_ONE, nextMusicRepeatMode(Player.REPEAT_MODE_ALL))
+        assertEquals(Player.REPEAT_MODE_OFF, nextMusicRepeatMode(Player.REPEAT_MODE_ONE))
+    }
+
     @Test fun skipClampsToKnownDuration() {
         assertEquals(60_000L, skipTarget(30_000, 30_000, 120_000))
         assertEquals(120_000L, skipTarget(100_000, 30_000, 120_000))

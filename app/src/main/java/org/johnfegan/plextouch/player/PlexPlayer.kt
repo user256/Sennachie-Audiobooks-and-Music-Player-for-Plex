@@ -34,6 +34,8 @@ data class PlaybackState(
     val trackCount: Int = 0,
     val speed: Float = 1f,
     val repeat: Boolean = false,
+    /** Music-only: the repeat control is on its single-track stop rather than its whole-album stop. */
+    val repeatOne: Boolean = false,
     val shuffle: Boolean = false,
     val sleepEndsAt: Long = 0,
     val error: UiText? = null,
@@ -159,7 +161,9 @@ class PlexPlayer(context: Context, private val changed: (PlaybackState) -> Unit,
         if (target.trackIndex == p.currentMediaItemIndex) seek(target.offsetMs) else chapter(target.trackIndex, target.offsetMs)
     }
     override fun speed(value: Float) { controller?.setPlaybackSpeed(value.coerceIn(PlexStore.MIN_SPEED, PlexStore.MAX_SPEED)); publish() }
-    override fun repeat() { controller?.let { it.repeatMode = if (it.repeatMode == Player.REPEAT_MODE_OFF) Player.REPEAT_MODE_ALL else Player.REPEAT_MODE_OFF }; publish() }
+    override fun repeat() { repeatAlbum() }
+    override fun cycleMusicRepeat() { controller?.let { it.repeatMode = nextMusicRepeatMode(it.repeatMode) }; publish() }
+    override fun repeatAlbum() { controller?.let { it.repeatMode = if (it.repeatMode == Player.REPEAT_MODE_ALL) Player.REPEAT_MODE_OFF else Player.REPEAT_MODE_ALL }; publish() }
     override fun shuffle() { controller?.let { it.shuffleModeEnabled = !it.shuffleModeEnabled }; publish() }
     override fun chapter(index: Int, positionMs: Long) { controller?.seekTo(index, positionMs.coerceAtLeast(0)); publish() }
     override fun queue(): List<PlexTrack> = controller?.let { player -> (0 until player.mediaItemCount).mapNotNull { gson.fromJson(player.getMediaItemAt(it).mediaMetadata.extras?.getString("track"), PlexTrack::class.java) } }.orEmpty()
@@ -180,6 +184,7 @@ class PlexPlayer(context: Context, private val changed: (PlaybackState) -> Unit,
             buffering = p.playbackState == Player.STATE_BUFFERING,
             trackIndex = p.currentMediaItemIndex, trackCount = p.mediaItemCount,
             speed = p.playbackParameters.speed, repeat = p.repeatMode != Player.REPEAT_MODE_OFF,
+            repeatOne = p.repeatMode == Player.REPEAT_MODE_ONE,
             shuffle = p.shuffleModeEnabled, sleepEndsAt = p.sessionExtras.getLong("sleepEndsAt"),
             error = p.playerError?.let { uiText(R.string.player_interrupted) },
             server = extras?.getString("server"), accountScope = extras?.getString("accountScope"),
@@ -211,6 +216,13 @@ fun playbackUri(track: PlexTrack, serverUrl: String): String = serverUrl.trimEnd
 fun bookSkip(durationsMs: List<Long>, index: Int, positionMs: Long, deltaMs: Long, liveDurationMs: Long, repeat: Boolean, shuffled: Boolean): BookPoint =
     if (shuffled || index !in durationsMs.indices) BookPoint(index.coerceAtLeast(0), skipTarget(positionMs, deltaMs, liveDurationMs))
     else BookTimeline(durationsMs).skip(index, positionMs, deltaMs, liveDurationMs, repeat)
+
+/** The familiar music-player cycle: off → whole album/queue → current track → off. */
+fun nextMusicRepeatMode(current: Int): Int = when (current) {
+    Player.REPEAT_MODE_OFF -> Player.REPEAT_MODE_ALL
+    Player.REPEAT_MODE_ALL -> Player.REPEAT_MODE_ONE
+    else -> Player.REPEAT_MODE_OFF
+}
 
 /** Skips stay within a known duration; while it is still unknown (buffering, `C.TIME_UNSET`) only the floor applies. */
 fun skipTarget(currentMs: Long, deltaMs: Long, durationMs: Long): Long {

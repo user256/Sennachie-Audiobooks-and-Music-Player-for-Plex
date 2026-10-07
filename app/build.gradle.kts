@@ -23,8 +23,8 @@ android {
     defaultConfig {
         minSdk = 26
         targetSdk = 36
-        versionCode = 18
-        versionName = "0.8.0"
+        versionCode = 19
+        versionName = "0.8.1"
         applicationId = "org.johnfegan.musicbooks"
         buildConfigField("boolean", "HOUSEHOLD_INTEGRATION", "false")
         buildConfigField("String", "PRODUCT_NAME", "\"Sennachie for Plex\"")

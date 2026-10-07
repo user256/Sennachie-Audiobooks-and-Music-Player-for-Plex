@@ -110,6 +110,8 @@ internal class FakePlayer : PlaybackController {
     override fun skip(deltaMs: Long) { commands += "skip:$deltaMs" }
     override fun speed(value: Float) { commands += "speed:$value" }
     override fun repeat() { commands += "repeat" }
+    override fun cycleMusicRepeat() { commands += "cycleMusicRepeat" }
+    override fun repeatAlbum() { commands += "repeatAlbum" }
     override fun shuffle() { commands += "shuffle" }
     override fun chapter(index: Int, positionMs: Long) { commands += "chapter:$index:$positionMs" }
     override fun queue() = queued

@@ -23,6 +23,10 @@ interface PlaybackController {
     fun skip(deltaMs: Long)
     fun speed(value: Float)
     fun repeat()
+    /** Music cycles off, whole queue, then current track. Audiobook repeat remains whole-book only. */
+    fun cycleMusicRepeat()
+    /** Enables or disables repeat for the complete album/queue, never just the current track. */
+    fun repeatAlbum()
     fun shuffle()
     /** Jumps to a queue entry; `positionMs` lands inside it, which is how embedded chapters of a single file are reached. */
     fun chapter(index: Int, positionMs: Long = 0)

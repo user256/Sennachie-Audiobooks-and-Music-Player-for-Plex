@@ -108,6 +108,13 @@ internal fun AlbumScreen(state: PlexTouchUiState, vm: PlexTouchViewModel) {
                         Spacer(Modifier.weight(1f))
                         IconButton(onClick = { vm.play(shuffled = true) }, enabled = state.tracks.isNotEmpty() && state.playback.ready) { Icon(Icons.Rounded.Shuffle, stringResource(R.string.shuffle_album), tint = PlexMuted) }
                         Spacer(Modifier.width(10.dp))
+                        val repeatingAlbum = playingAlbum && state.playback.repeat && !state.playback.repeatOne
+                        val repeatingAlbumState = onOffState(repeatingAlbum).asString()
+                        IconButton(onClick = { if (playingAlbum) vm.toggleAlbumRepeat() else vm.play(infinite = true) }, enabled = state.tracks.isNotEmpty() && state.playback.ready,
+                            modifier = Modifier.semantics { stateDescription = repeatingAlbumState }) {
+                            Icon(Icons.Rounded.Repeat, stringResource(R.string.repeat_album), tint = if (repeatingAlbum) PlexHighlight else PlexMuted)
+                        }
+                        Spacer(Modifier.width(10.dp))
                         PlayButton(playing = playingAlbum && state.playback.playing, enabled = state.tracks.isNotEmpty() && state.playback.ready) {
                             if (playingAlbum && state.playback.playing) vm.togglePlayback() else vm.play()
                         }
@@ -271,12 +278,18 @@ internal fun PlayerScreen(state: PlexTouchUiState, vm: PlexTouchViewModel) {
             }
             Row(Modifier.fillMaxWidth().padding(vertical = 22.dp), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
                 val shuffleState = onOffState(p.shuffle).asString()
-                val repeatState = onOffState(p.repeat).asString()
+                val repeatState = stringResource(when {
+                    p.repeatOne -> R.string.repeat_track
+                    p.repeat -> R.string.repeat_album
+                    else -> R.string.repeat_off
+                })
                 if (!book) IconButton(onClick = vm::toggleShuffle, modifier = Modifier.semantics { stateDescription = shuffleState }) { Icon(Icons.Rounded.Shuffle, stringResource(R.string.toggle_shuffle), tint = if (p.shuffle) PlexHighlight else PlexMuted) }
                 IconButton(onClick = { if (book) vm.skip(-30_000) else vm.previous() }, modifier = Modifier.size(52.dp)) { Icon(if (book) Icons.Rounded.Replay30 else Icons.Rounded.SkipPrevious, stringResource(if (book) R.string.back_30 else R.string.previous_track), Modifier.size(36.dp)) }
                 PlayButton(p.playing, size = 76) { vm.togglePlayback() }
                 IconButton(onClick = { if (book) vm.skip(30_000) else vm.next() }, modifier = Modifier.size(52.dp)) { Icon(if (book) Icons.Rounded.Forward30 else Icons.Rounded.SkipNext, stringResource(if (book) R.string.forward_30 else R.string.next_track), Modifier.size(36.dp)) }
-                if (!book) IconButton(onClick = vm::toggleRepeat, modifier = Modifier.semantics { stateDescription = repeatState }) { Icon(Icons.Rounded.Repeat, stringResource(R.string.toggle_repeat), tint = if (p.repeat) PlexHighlight else PlexMuted) }
+                if (!book) IconButton(onClick = vm::cycleMusicRepeat, modifier = Modifier.semantics { stateDescription = repeatState }) {
+                    Icon(if (p.repeatOne) Icons.Rounded.RepeatOne else Icons.Rounded.Repeat, stringResource(R.string.toggle_repeat), tint = if (p.repeat) PlexHighlight else PlexMuted)
+                }
             }
             // Wraps onto a second line at large font sizes instead of squeezing the labels.
             if (book) FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {

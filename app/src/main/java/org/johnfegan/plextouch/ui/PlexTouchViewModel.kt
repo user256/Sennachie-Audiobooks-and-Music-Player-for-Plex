@@ -548,6 +548,8 @@ class PlexTouchViewModel @JvmOverloads constructor(
     /** Settings: the speed every audiobook without its own speed plays at. */
     fun defaultAudiobookSpeed(value: Float) { val profile = speeds.saveDefault(value, state.playback); update { it.copy(speedProfile = profile) } }
     fun toggleRepeat() = player.repeat()
+    fun cycleMusicRepeat() = player.cycleMusicRepeat()
+    fun toggleAlbumRepeat() = player.repeatAlbum()
     fun toggleShuffle() = player.shuffle()
     fun sleep(minutes: Int) = player.sleep(minutes)
     /** Saved first, so a service started later reads it; a running service applies it at once (off is instant). */
