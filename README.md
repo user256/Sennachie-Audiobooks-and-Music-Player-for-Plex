@@ -11,7 +11,9 @@ It is an independent project and is not affiliated with or endorsed by Plex, Inc
 
 ## Status
 
-Sennachie is in active personal testing. The public build is deliberately separate from the household build: it has no household service, address, or private discovery integration.
+Sennachie is in active personal testing and has only been tested on the author's GrapheneOS Pixel. It is offered as-is, with no guarantee that it will work on your device, Plex server, network, or Sonos setup.
+
+It is shared because it solves a few frustrating personal pain points: a focused audiobook player with an easy skip-back flow, and a music player that can keep an album playing on repeat.
 
 The first GitHub release will be a signed Android APK for people comfortable installing apps outside Google Play. Until that release is available, use the source only if you are happy building Android projects yourself.
 
